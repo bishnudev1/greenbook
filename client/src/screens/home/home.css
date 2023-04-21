@@ -1,0 +1,56 @@
+#loader{
+    height: 50px;
+    width: 50px;
+    border-radius: 150%;
+    border: 2px dotted green;
+    border-top-color: white;
+    animation: spin 0.5s infinite ease-in-out;
+}
+
+@keyframes spin{
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.navbar-blur {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+  }
+
+
+.whatyoucando{
+    padding: 15px;
+    border: 3px none white;
+    border-radius: 10px;
+    transition: .5s all;
+    animation: glowing 1s infinite ease-in-out alternate;
+}
+
+.whatyoucando:hover{
+    transform: translateY(-10px);
+}
+
+#founder{
+    animation: floating 1s infinite ease-in-out alternate;
+}
+
+.profile-btn{
+    transition: 0.5s all;
+}
+
+.profile-btn:hover{
+    transform: translateX(5px);
+}
+
+@keyframes floating{
+    to{
+        transform: translateY(10px);
+    }
+}
+
+@keyframes glowing{
+    to{
+        box-shadow: 0 0 30px 1px white;
+    }
+}
