@@ -16,7 +16,7 @@ const Profile = ({user}) => {
     <Box color={'black'} bgColor={'green.700'} minH={"70vh"} p={["4", "20"]}>
       <Stack color={"white"} justifyContent={"center"} alignItems={["center", "flex-start"]} spacing={"6"} direction={["column", "row"]}>
         <VStack mt={["10","0"]} alignItems={["center", "flex-start"]}>
-          <Avatar size={'2xl'} />
+          <Avatar src={user.user.avatar.url} size={'2xl'} />
           <Button variant={'ghost'} colorScheme='white' size={'sm'}>Update Picture</Button>
         </VStack>
         <VStack alignItems={["center", "flex-start"]} spacing={"5"}>

@@ -24,20 +24,43 @@ const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [image, setImage] = useState('');
+  const [imagePrev, setImagePrev] = useState('');
 
   const dispatch = useDispatch();
 
+
+  const imageHandler = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      setImagePrev(reader.result);
+      setImage(file);
+    }
+
+  }
+
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+
+    const myForm = new FormData();
+
+    myForm.append('name', name);
+    myForm.append('email', email);
+    myForm.append('password', password);
+    myForm.append('file', image);
+
+    dispatch(register(myForm));
   }
 
 
   return (
     <Box color={'black'} bgColor={'green.700'} minH={"90vh"} p={["4", '20']}>
-      <Heading mt={["10","0"]} color={'white'} textAlign={"center"} size={'2xl'} children='Create Account...' />
+      <Heading mt={["10", "0"]} color={'white'} textAlign={"center"} size={'2xl'} children='Create Account...' />
       <VStack color={'white'} px={["2", "60"]} justifyContent={"center"} mt={["20", "10"]} spacing={'5'}>
-        <Avatar size={'xl'} />
+        <Avatar src={imagePrev} size={'xl'} />
         <VStack width={"100%"} alignItems={["flex-start"]} spacing={'3'}>
           <FormLabel textAlign={["left"]}>Name</FormLabel>
           <Input value={name} onChange={(e) => setName(e.target.value)} width={'100%'} type='text' placeholder='Bishnudev Khutia' />
@@ -52,7 +75,7 @@ const Register = () => {
         </VStack>
         <VStack width={"100%"} alignItems={["flex-start"]} spacing={'3'}>
           <FormLabel textAlign={["left"]}>Profile Image</FormLabel>
-          <Input css={fileUploaderStyle} required accept='image/*' type='file' />
+          <Input onChange={imageHandler} css={fileUploaderStyle} required accept='image/*' type='file' />
         </VStack>
 
         <VStack width={"100%"} alignItems={"center"} spacing={'2'}>

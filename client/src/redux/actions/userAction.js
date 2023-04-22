@@ -2,12 +2,12 @@ import { backendUrl } from "../store";
 import axios from "axios";
 
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (formdata) => async (dispatch) => {
     try {
         dispatch({ type: "registerRequest" });
-        const { data } = await axios.post(`${backendUrl}/register`, { name, email, password }, {
+        const { data } = await axios.post(`${backendUrl}/register`, formdata, {
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "multipart/form-data",
             },
             withCredentials: true,
         });

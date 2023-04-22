@@ -1,6 +1,8 @@
 import { User } from "../model/user.js";
 import bcrypt from 'bcrypt';
 import { sendToken } from "../utils/sendToken.js";
+import cloudinary from 'cloudinary';
+import getDataUri from "../utils/dataUri.js";
 
 export const register = async (req, res) => {
 
@@ -11,6 +13,9 @@ export const register = async (req, res) => {
         message: 'Fill all the details'
     });
 
+    const file = req.file;
+    const fileUri = getDataUri(file);
+
     const isExist = await User.findOne({ email });
 
     if (isExist) return res.status(402).json({
@@ -18,10 +23,16 @@ export const register = async (req, res) => {
         message: 'User with this email is already exists'
     });
 
+    const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
+
     const newUser = await User.create({
         name,
         email,
-        password
+        password,
+        avatar: {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        }
     });
 
     sendToken(res, newUser, `New user has added ${newUser.name}`, 201);
