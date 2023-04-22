@@ -42,7 +42,7 @@ const App = () => {
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='/me' element={<ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Profile user={user}/>
+          <Profile user={user} />
         </ProtectedRoute>} />
         <Route path='/login' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect='/me'>
           <Login />
@@ -52,7 +52,7 @@ const App = () => {
         </ProtectedRoute>} />
         <Route path='/check-weather' element={<Weather />} />
         <Route path='/greenblogs' element={<Blogs />} />
-        <Route path='/create-an-article' element={<CreateBlog />} />
+        <Route path='/create-an-article' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><CreateBlog /></ProtectedRoute>} />
         <Route path='/greenblogs/blog/:id' element={<Blog />} />
       </Routes>
       <Footer />

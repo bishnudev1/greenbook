@@ -35,7 +35,7 @@ const Register = () => {
 
   return (
     <Box color={'black'} bgColor={'green.700'} minH={"90vh"} p={["4", '20']}>
-      <Heading color={'white'} textAlign={"center"} size={'2xl'} children='Create Account...' />
+      <Heading mt={["10","0"]} color={'white'} textAlign={"center"} size={'2xl'} children='Create Account...' />
       <VStack color={'white'} px={["2", "60"]} justifyContent={"center"} mt={["20", "10"]} spacing={'5'}>
         <Avatar size={'xl'} />
         <VStack width={"100%"} alignItems={["flex-start"]} spacing={'3'}>

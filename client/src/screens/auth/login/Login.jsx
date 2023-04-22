@@ -20,7 +20,7 @@ const Login = () => {
 
   return (
     <Box color={'black'} bgColor={'green.700'} minH={"80vh"} p={["4", '20']}>
-      <Heading color={'white'}  textAlign={"center"} size={'2xl'} children='Welcome back...' />
+      <Heading mt={["10","0"]} color={'white'}  textAlign={"center"} size={'2xl'} children='Welcome back...' />
       <VStack color={'white'}  px={["2", "60"]} justifyContent={"center"} mt={["20", "10"]} spacing={'5'}>
         <VStack width={"100%"} alignItems={["flex-start"]} spacing={'3'}>
           <FormLabel textAlign={["left"]}>Email</FormLabel>

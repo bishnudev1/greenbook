@@ -24,7 +24,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 import userRoutes from './routes/userRoutes.js';
+import otherRoutes from './routes/otherRoutes.js';
 app.use('/api/v1', userRoutes);
+app.use('/api/v1', otherRoutes);
 
 
 app.get('/', (req, res) => {
