@@ -15,7 +15,7 @@
 - React JS & Chakra-UI
 
 ### Backend
-- Node JS & Express JS
+- Node JS
 
 ### Database
 - MongoDB Atlas
@@ -32,8 +32,8 @@
 ```bash
   npm i
 ```
-- Create an config.env file in <b>/config</b> and add a port [PORT] and mongodb url [MONGO_URI] in it.
-- Create a free account in Cloudinary and get the cloud_name, api_key & api_secret and set it to env file.
+- Create an config.env file in <b>/config</b> and add a <b>PORT</b> and a <b>MONGO_URI</b> in it.
+- Create a free account in Cloudinary and get the <b>CLOUDINARY_CLOUD_NAME</b>, <b>CLOUDINARY_API_KEY</b> & <b>CLOUDINARY_API_SECRET</b> and set it to env file.
 - Run the project using in both <b>Client</b> & <b>Server</b> directory by 
 ```bash
   npm start
