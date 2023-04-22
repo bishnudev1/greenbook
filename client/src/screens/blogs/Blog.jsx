@@ -24,9 +24,9 @@ const Blog = () => {
                     <Text fontWeight={"bold"} color={'green.600'} fontFamily={"inherit"}>{`Written by Bishnudev Khutia`}</Text>
                 </HStack>
                 <HStack width={["100%","unset"]} spacing={["4", "8"]} justifyContent={"space-evenly"}>
-                    <a href='#'><SiFacebook size={'40'} color='skyblue' /></a>
-                    <a href='#'><SiStackoverflow size={'40'} color='orange' /></a>
-                    <a href='#'><SiLinkedin size={'40'} color='blue' /></a>
+                    <a href='www.google.co.in'><SiFacebook size={'40'} color='skyblue' /></a>
+                    <a href='www.google.co.in'><SiStackoverflow size={'40'} color='orange' /></a>
+                    <a href='www.google.co.in'><SiLinkedin size={'40'} color='blue' /></a>
                 </HStack>
             </VStack>
         </Box>
