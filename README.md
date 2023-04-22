@@ -20,6 +20,9 @@
 ### Database
 - MongoDB Atlas
 
+### State Management
+- Redux Toolkit
+
 ### 3rd Party Services
 - Cloudinary
 - Mailport
@@ -33,6 +36,7 @@
   npm i
 ```
 - Create an config.env file in <b>/config</b> and add a <b>PORT</b> and a <b>MONGO_URI</b> in it.
+- Set a JWT secret key <b>SECRET_KEY</b> in env file.
 - Create a free account in Cloudinary and get the <b>CLOUDINARY_CLOUD_NAME</b>, <b>CLOUDINARY_API_KEY</b> & <b>CLOUDINARY_API_SECRET</b> and set it to env file.
 - Run the project using in both <b>Client</b> & <b>Server</b> directory by 
 ```bash
