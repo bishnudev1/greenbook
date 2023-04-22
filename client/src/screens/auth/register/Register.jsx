@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Heading, Button, VStack, Input, Text, FormLabel, HStack, Avatar } from '@chakra-ui/react';
+import { Box, Heading, Button, VStack, Input, Text, FormLabel, HStack, Avatar } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 
@@ -20,7 +20,7 @@ const Register = () => {
   };
 
   return (
-    <Container minH={"90vh"} maxW={"container.lg"} p={["4", '12']}>
+    <Box color={'black'} bgColor={'green.700'} minH={"90vh"} p={["4", '20']}>
       <Heading textAlign={"center"} size={'2xl'} children='Create Account...' />
       <VStack px={["2", "60"]} justifyContent={"center"} mt={["20","10"]} spacing={'5'}>
         <Avatar size={'xl'}/>
@@ -50,7 +50,7 @@ const Register = () => {
           <Link to={'/login'}><Button variant={'outline'}>Login</Button></Link>
         </HStack>
       </VStack>
-    </Container>
+    </Box>
   )
 }
 

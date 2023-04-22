@@ -15,15 +15,15 @@ const Blog = () => {
 
     return (
         <Box bgColor={'white'} minH={"100vh"} p={["4", "16"]}>
-            <VStack spacing={"10"} px={["4", "8"]} alignItems={["center", "flex-start"]}>
-                <Heading color={'green'} size={"3xl"}>Blog {id}</Heading>
-                <Image objectFit={'contain'} src='https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
-                <Text fontFamily={"inherit"} fontWeight={"bold"} color={'green.800'} fontSize={"2xl"} textAlign={["center", "left"]}>{natureDesc}</Text>
+            <VStack spacing={"10"} px={["4", "8"]} alignItems={"flex-start"}>
+                <Heading textAlign={"left"} color={'green'} size={"3xl"}>{`Blog ${id}`}</Heading>
+                <Image objectFit={'contain'} boxSize={["unset","80"]} src='https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
+                <Text fontFamily={"inherit"} fontWeight={"bold"} color={'green.800'} fontSize={"2xl"}>{natureDesc}</Text>
                 <HStack pt={["4", "6"]} spacing={["4", "8"]} justifyContent={"space-evenly"} alignItems={["center", "flex-end"]}>
-                    <Text textAlign={["center", "left"]} fontWeight={"bold"} color={'green.600'} fontFamily={"inherit"}>{`Published on 21/04/23`}</Text>
-                    <Text textAlign={["center", "left"]} fontWeight={"bold"} color={'green.600'} fontFamily={"inherit"}>{`Written by Bishnudev Khutia`}</Text>
+                    <Text fontWeight={"bold"} color={'green.600'} fontFamily={"inherit"}>{`Published on 21/04/23`}</Text>
+                    <Text fontWeight={"bold"} color={'green.600'} fontFamily={"inherit"}>{`Written by Bishnudev Khutia`}</Text>
                 </HStack>
-                <HStack spacing={["4", "8"]} justifyContent={"space-evenly"} alignItems={["center", "flex-end"]}>
+                <HStack width={["100%","unset"]} spacing={["4", "8"]} justifyContent={"space-evenly"}>
                     <a href='#'><SiFacebook size={'40'} color='skyblue' /></a>
                     <a href='#'><SiStackoverflow size={'40'} color='orange' /></a>
                     <a href='#'><SiLinkedin size={'40'} color='blue' /></a>

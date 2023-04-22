@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Heading, Button, VStack, Input, Text, FormLabel, HStack } from '@chakra-ui/react';
+import { Box, Heading, Button, VStack, Input, Text, FormLabel, HStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 
@@ -7,7 +7,7 @@ const Login = () => {
 
 
   return (
-    <Container minH={"80vh"} maxW={"container.lg"} p={["4", '12']}>
+    <Box color={'black'} bgColor={'green.700'} minH={"80vh"} p={["4", '20']}>
       <Heading textAlign={"center"} size={'2xl'} children='Welcome back...' />
       <VStack px={["2", "60"]} justifyContent={"center"} mt={["20", "10"]} spacing={'5'}>
         <VStack width={"100%"} alignItems={["flex-start"]} spacing={'3'}>
@@ -27,7 +27,7 @@ const Login = () => {
           <Link to={'/register'}><Button variant={'outline'}>Register</Button></Link>
         </HStack>
       </VStack>
-    </Container>
+    </Box>
   )
 }
 

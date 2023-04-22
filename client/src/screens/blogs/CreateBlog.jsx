@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Heading, Button, VStack, Input, FormLabel } from '@chakra-ui/react';
+import { Box, Heading, Button, VStack, Input, FormLabel } from '@chakra-ui/react';
 
 
 export const fileUploadCss = {
@@ -19,9 +19,9 @@ const CreateBlog = () => {
     };
 
     return (
-        <Container minH={"90vh"} maxW={"container.lg"} p={["4", '12']}>
+        <Box color={'black'} bgColor={'green.700'} minH={"90vh"} p={["4", '20']}>
             <Heading textAlign={"center"} size={'2xl'} children='Write a nature article...' />
-            <VStack px={["2", "60"]} justifyContent={"center"} mt={["20", "10"]} spacing={'5'}>
+            <VStack color={'white'} px={["2", "60"]} justifyContent={"center"} mt={["20", "10"]} spacing={'5'}>
                 <VStack width={"100%"} alignItems={["flex-start"]} spacing={'3'}>
                     <FormLabel textAlign={["left"]}>Title</FormLabel>
                     <Input width={'100%'} type='text' placeholder='Blog 1' />
@@ -40,7 +40,7 @@ const CreateBlog = () => {
                 </VStack>
                 <Button variant={'outline'} size={'md'} colorScheme='white'>Submit</Button>
             </VStack>
-        </Container>
+        </Box>
     )
 }
 

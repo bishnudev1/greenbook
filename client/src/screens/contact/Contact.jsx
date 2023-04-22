@@ -9,6 +9,7 @@ const Contact = () => {
             alignItems={["flex-start"]}
                 spacing={"6"}
                 px={["0", '20']}
+                color={'white'}
             >
                 <FormLabel fontFamily={'heading'} fontSize={'lg'} htmlFor='name'>Name</FormLabel>
                 <Input size={'lg'} placeholder='Example: John Smith' />
