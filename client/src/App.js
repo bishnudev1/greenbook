@@ -15,6 +15,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './redux/actions/userAction';
 import { ProtectedRoute } from 'protected-route-react';
+import UpdateProfile from './screens/me/UpdateProfile';
+import UpdateProfilePicture from './screens/me/UpdateProfilePicture';
 
 const App = () => {
 
@@ -53,6 +55,8 @@ const App = () => {
         <Route path='/check-weather' element={<Weather />} />
         <Route path='/greenblogs' element={<Blogs />} />
         <Route path='/create-an-article' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><CreateBlog /></ProtectedRoute>} />
+        <Route path='/update-profile' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><UpdateProfile /></ProtectedRoute>} />
+        <Route path='/update-dp' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><UpdateProfilePicture /></ProtectedRoute>} />
         <Route path='/greenblogs/blog/:id' element={<Blog />} />
       </Routes>
       <Footer />

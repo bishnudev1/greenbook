@@ -3,8 +3,11 @@ import { Box, Heading, Button, VStack, Input, Textarea, FormLabel } from '@chakr
 import { useDispatch } from 'react-redux';
 import { contact } from '../../redux/actions/otherAction';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const Contact = () => {
+
+    const { loading } = useSelector(state => state.other);
 
     const dispatch = useDispatch();
 
@@ -33,7 +36,7 @@ const Contact = () => {
                 <Input value={email} onChange={(e) => setEmail(e.target.value)} size={'lg'} placeholder='Example: smith@john.com' />
                 <FormLabel fontFamily={'heading'} fontSize={'lg'} htmlFor='message'>Message</FormLabel>
                 <Textarea value={message} onChange={(e) => setMessage(e.target.value)} resize="false" placeholder='Your question, query, message or complain if any...' />
-                <Button onClick={submitMessage} variant={'outline'} size={'lg'} colorScheme='black'>Submit</Button>
+                <Button isLoading={loading} onClick={submitMessage} variant={'outline'} size={'lg'} colorScheme='black'>Submit</Button>
             </VStack>
         </Box>
     )

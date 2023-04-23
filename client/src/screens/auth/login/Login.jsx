@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Box, Heading, Button, VStack, Input, Text, FormLabel, HStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../redux/actions/userAction';
 
 
 const Login = () => {
+
+  const { loading } = useSelector(state => state.user);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +34,7 @@ const Login = () => {
         </VStack>
         <VStack width={"100%"} alignItems={"center"} spacing={'2'}>
           <Button variant={'link'} colorScheme='green' size={'lg'}>Forget Password ?</Button>
-          <Button onClick={submitHandler} variant={'ghost'} size={'lg'} colorScheme='white'>Login</Button>
+          <Button isLoading={loading} onClick={submitHandler} variant={'ghost'} size={'lg'} colorScheme='white'>Login</Button>
         </VStack>
         <HStack justifyContent={"space-evenly"} alignItems={"center"} spacing={'4'}>
           <Text fontFamily={'sans-serif'} fontSize={'md'}>Doesn't have an account ?</Text>

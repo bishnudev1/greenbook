@@ -91,3 +91,55 @@ export const myProfile = async (req, res) => {
         console.log(error);
     }
 }
+
+export const updateProfile = async (req, res) => {
+    try {
+
+        const { name, email } = req.body;
+
+        const user = await User.findById(req.user._id);
+
+        if (name) user.name = name;
+        if (email) user.email = email;
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Your profile has been updated successfully"
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateProfilePicture = async (req, res) => {
+    try {
+
+        const user = await User.findById(req.user._id);
+
+        const file = req.file;
+
+        const fileUri = getDataUri(file);
+
+        const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
+
+        await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+
+        user.avatar = {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        }
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Your profile has been updated successfully"
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}

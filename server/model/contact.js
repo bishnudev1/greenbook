@@ -14,8 +14,8 @@ const contactSchema = new mongoose.Schema({
         required: [true, "Please enter your password..."]
     },
     createdAt: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: new Date(Date.now()).toLocaleDateString()
     }
 });
 

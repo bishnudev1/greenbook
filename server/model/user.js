@@ -26,8 +26,8 @@ const userSchema = new mongoose.Schema({
         },
     },
     createdAt: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: new Date(Date.now()).toLocaleDateString()
     },
     noOfTreesPlanted: {
         type: Number,

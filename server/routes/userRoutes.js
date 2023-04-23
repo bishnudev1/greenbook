@@ -1,5 +1,5 @@
 import express from 'express';
-import { login, logout, myProfile, register } from '../controllers/userController.js';
+import { login, logout, myProfile, register, updateProfile, updateProfilePicture } from '../controllers/userController.js';
 import { Authentication } from '../middlewares/auth.js';
 import singleUpload from '../middlewares/multer.js';
 
@@ -9,5 +9,7 @@ router.route('/register').post(singleUpload, register);
 router.route('/login').post(login);
 router.route('/logout').get(logout);
 router.route('/me').get(Authentication, myProfile);
+router.route('/update-profile').put(Authentication, updateProfile);
+router.route('/update-dp').put(Authentication, singleUpload, updateProfilePicture);
 
 export default router;
