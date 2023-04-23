@@ -17,11 +17,13 @@ import { loadUser } from './redux/actions/userAction';
 import { ProtectedRoute } from 'protected-route-react';
 import UpdateProfile from './screens/me/UpdateProfile';
 import UpdateProfilePicture from './screens/me/UpdateProfilePicture';
+import { loadBlogs } from './redux/actions/blogAction';
 
 const App = () => {
 
   const { isAuthenticated, user, error, message } = useSelector(state => state.user);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (error) {
@@ -37,6 +39,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(loadUser());
+    dispatch(loadBlogs());
   }, [dispatch]);
   return (
     <Router>

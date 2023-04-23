@@ -16,6 +16,6 @@ export const contact = (name, email, message) => async (dispatch) => {
 
         dispatch({ type: "contactSuccess", payload: data });
     } catch (error) {
-        dispatch({ type: "registerFailed", payload: error.response.data.message });
+        dispatch({ type: "contactFailed", payload: error.response.data.message });
     }
 }

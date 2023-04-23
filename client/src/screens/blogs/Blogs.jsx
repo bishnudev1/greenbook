@@ -1,47 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Heading, Button, VStack, Text, HStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { loadBlogs } from '../../redux/actions/blogAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Blogs = () => {
 
+    const { blogs } = useSelector(state => state.blog);
+    const dispatch = useDispatch();
 
-    const blogData = [
-        {
-            id: 1,
-            title: 'Blog 1',
-            desc: 'This is the description of Blog 1. It is for testing purpose.',
-            createdAt: '21/04/23',
-            createdBy: 'Bishnudev Khutia'
-        },
-        {
-            id: 2,
-            title: 'Blog 2',
-            desc: 'This is the description of Blog 2. It is for testing purpose.',
-            createdAt: '12/04/23',
-            createdBy: 'Arnab Metya'
-        },
-        {
-            id: 3,
-            title: 'Blog 3',
-            desc: 'This is the description of Blog 3. It is for testing purpose.',
-            createdAt: '10/03/23',
-            createdBy: 'Sudip Kar'
-        },
-    ];
+    useEffect(() => {
+        dispatch(loadBlogs())
+    }, [])
 
     return (
         <Box bgColor={'green.300'} py={["4", "16"]} px={["4", "56"]} minH={"100vh"}>
             <VStack spacing={"6"} alignItems={["center", "flex-start"]}>
                 {
-                    blogData.map((item, index) => {
+                    blogs.map((item, index) => {
                         return <VStack key={index} p={["3", "4"]} borderRadius={"xl"} bgColor={'whiteAlpha.600'} w={"100%"} spacing={"4"} alignItems={"flex-start"}>
                             <Heading color={'green'} size={["lg", "xl"]}>{item.title}</Heading>
                             <Text fontFamily={"inherit"} fontWeight={"bold"} color={'green.800'} fontSize={["lg", "xl"]} textAlign={"left"}>{item.desc}</Text>
                             <HStack alignItems={"center"} justifyContent={"space-evenly"}>
                                 <Text textAlign={["center", "left"]} color={'green.600'} fontFamily={"inherit"}>- {item.createdBy}</Text>
                             </HStack>
-                            <Link to={`blog/${item.id}`}><Button variant={'link'} color={'green'} size={'lg'}>Read Now</Button></Link>
+                            <Link to={`blog/${item._id}`}><Button variant={'link'} color={'green'} size={'lg'}>Read Now</Button></Link>
                         </VStack>
                     })
                 }

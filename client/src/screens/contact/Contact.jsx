@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Heading, Button, VStack, Input, Textarea, FormLabel } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { contact } from '../../redux/actions/otherAction';
@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const Contact = () => {
 
-    const { loading } = useSelector(state => state.other);
+    const { loading, error, success } = useSelector(state => state.other);
 
     const dispatch = useDispatch();
 
@@ -15,10 +15,20 @@ const Contact = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch({ type: "clearError" })
+        }
+        if (success) {
+            toast.success(success);
+            dispatch({ type: "clearMessage" })
+        }
+    }, [dispatch, error, success])
+
     const submitMessage = (e) => {
         e.preventDefault();
         dispatch(contact(name, email, message));
-        toast.success(`Hi ${name}. Your feedback has been sent to us. Thanks.`)
     }
 
     return (

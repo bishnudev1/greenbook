@@ -5,14 +5,20 @@ export const otherReducer = createReducer({}, {
     contactRequest: (state) => {
         state.loading = true;
     },
-    contactSuccess: (state, action) => { 
+    contactSuccess: (state, action) => {
         state.loading = false;
         state.msgSent = true;
-        state.message = action.payload.message;
+        state.success = action.payload.message;
     },
-    contactFailed: (state, action) => { 
+    contactFailed: (state, action) => {
         state.loading = false;
         state.msgSent = false;
         state.error = action.payload;
     },
+    clearError: (state) => {
+        state.error = null;
+    },
+    clearMessage: (state) => {
+        state.message = null;
+    }
 });

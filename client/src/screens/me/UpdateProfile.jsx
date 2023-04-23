@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Button, VStack, Input, FormLabel } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../../redux/actions/profileAction';
@@ -16,18 +16,22 @@ const UpdateProfile = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch({ type: "clearError" })
+        }
+        if (message) {
+            toast.success(message);
+            dispatch({ type: "clearMessage" })
+            navigate('/me');
+        }
+    }, [dispatch, error, message])
+
     const updateProfileHandler = e => {
         e.preventDefault();
 
         dispatch(updateProfile(name, email));
-
-        if (error) {
-            toast.error(error);
-        }
-        if (message) {
-            toast.success(message);
-            navigate('/me');
-        }
     }
 
     return (

@@ -1,12 +1,14 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Box, Heading, Button, VStack, Text, HStack, Avatar, Stack } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadUser, logout } from '../../redux/actions/userAction';
 import { Link } from 'react-router-dom';
 
-const Profile = ({user}) => {
+const Profile = ({ user }) => {
 
   const dispatch = useDispatch();
+
+  const { loading, error, message } = useSelector(state => state.profile);
 
   const logoutHandler = e => {
     e.preventDefault();
@@ -15,13 +17,13 @@ const Profile = ({user}) => {
 
   useEffect(() => {
     dispatch(loadUser());
-}, [dispatch]);
+  }, [dispatch, loading, error, message]);
 
 
   return (
     <Box color={'black'} bgColor={'green.700'} minH={"70vh"} p={["4", "20"]}>
       <Stack color={"white"} justifyContent={"center"} alignItems={["center", "flex-start"]} spacing={"6"} direction={["column", "row"]}>
-        <VStack mt={["10","0"]} alignItems={["center", "flex-start"]}>
+        <VStack mt={["10", "0"]} alignItems={["center", "flex-start"]}>
           <Avatar src={user.user.avatar.url} size={'2xl'} />
           <Link to={'/update-dp'}><Button variant={'ghost'} colorScheme='white' size={'sm'}>Update Picture</Button></Link>
         </VStack>

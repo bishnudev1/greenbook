@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, Button, VStack, Input, FormLabel, Avatar } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -45,6 +45,18 @@ const UpdateProfilePicture = () => {
 
     const { loading, message, error } = useSelector(state => state.profile);
 
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch({ type: "clearError" })
+        }
+        if (message) {
+            toast.success(message);
+            dispatch({ type: "clearMessage" })
+            navigate('/me');
+        }
+    }, [dispatch, error, message])
+
     const submitHandler = e => {
         e.preventDefault();
 
@@ -52,14 +64,6 @@ const UpdateProfilePicture = () => {
         myForm.append('file', image);
 
         dispatch(updateProfilePicture(myForm));
-
-        if (error) {
-            toast.error(error);
-        }
-        if (message) {
-            toast.success(message);
-            navigate('/me');
-        }
     }
 
 

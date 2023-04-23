@@ -25,8 +25,10 @@ app.use(cors(corsOptions));
 
 import userRoutes from './routes/userRoutes.js';
 import otherRoutes from './routes/otherRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
 app.use('/api/v1', userRoutes);
 app.use('/api/v1', otherRoutes);
+app.use('/api/v1', blogRoutes);
 
 
 app.get('/', (req, res) => {
