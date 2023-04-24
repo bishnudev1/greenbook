@@ -19,6 +19,6 @@ export const otherReducer = createReducer({}, {
         state.error = null;
     },
     clearMessage: (state) => {
-        state.message = null;
+        state.success = null;
     }
 });

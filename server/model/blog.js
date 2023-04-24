@@ -29,7 +29,8 @@ const blogSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     }
 });
 

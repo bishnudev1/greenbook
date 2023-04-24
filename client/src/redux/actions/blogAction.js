@@ -15,6 +15,19 @@ export const loadBlogs = () => async (dispatch) => {
     }
 }
 
+export const deleteBlog = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: "deleteBlogRequest" });
+        const { data } = await axios.delete(`${backendUrl}/delete-blog/${id}`, {
+            withCredentials: true,
+        });
+        dispatch({ type: "deleteBlogSuccess", payload: data });
+
+    } catch (error) {
+        dispatch({ type: "deleteBlogFailed", payload: error.response.data.message });
+    }
+}
+
 export const createBlog = (formdata) => async (dispatch) => {
     try {
         dispatch({ type: "createBlogRequest" });

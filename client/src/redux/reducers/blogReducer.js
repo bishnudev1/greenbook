@@ -24,6 +24,17 @@ export const blogReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
+    deleteBlogRequest: (state) => {
+        state.loading = true;
+    },
+    deleteBlogSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload.message;
+    },
+    deleteBlogFailed: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
     clearError: (state) => {
         state.error = null;
     },
