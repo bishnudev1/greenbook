@@ -13,7 +13,14 @@ export const register = async (req, res) => {
         message: 'Fill all the details'
     });
 
+
     const file = req.file;
+
+    if (!file) return res.status(422).json({
+        success: false,
+        message: 'Please upload your picture'
+    });
+
     const fileUri = getDataUri(file);
 
     const isExist = await User.findOne({ email });
@@ -121,6 +128,11 @@ export const updateProfilePicture = async (req, res) => {
 
         const file = req.file;
 
+        if (!file) return res.status(422).json({
+            success: false,
+            message: "Please upload your picture"
+        });
+
         const fileUri = getDataUri(file);
 
         const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
@@ -137,6 +149,39 @@ export const updateProfilePicture = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Your profile has been updated successfully"
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updatePassword = async (req, res) => {
+    try {
+
+        const { password, newPassword } = req.body;
+
+        if (!password || !newPassword) return res.status(422).json({
+            success: false,
+            message: "Please enter your current and new password"
+        });
+
+        const user = await User.findById(req.user._id);
+
+        const verifyPassword = await bcrypt.compare(password, user.password);
+
+        if (!verifyPassword) return res.status(400).json({
+            success: false,
+            message: "Your password is incorrect"
+        });
+
+        user.password = newPassword;
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Your password has been changed successfully"
         });
 
     } catch (error) {

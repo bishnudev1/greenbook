@@ -71,6 +71,11 @@ export const createBlog = async (req, res) => {
 
         const file = req.file;
 
+        if (!file) return res.status(422).json({
+            success: false,
+            message: 'Please upload any article image'
+        });
+
         const fileUri = getDataUri(file);
 
         const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);

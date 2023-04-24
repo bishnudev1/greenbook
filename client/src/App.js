@@ -18,6 +18,7 @@ import { ProtectedRoute } from 'protected-route-react';
 import UpdateProfile from './screens/me/UpdateProfile';
 import UpdateProfilePicture from './screens/me/UpdateProfilePicture';
 import { loadBlogs } from './redux/actions/blogAction';
+import ChangePassword from './screens/me/ChangePassword';
 
 const App = () => {
 
@@ -60,6 +61,7 @@ const App = () => {
         <Route path='/create-an-article' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><CreateBlog /></ProtectedRoute>} />
         <Route path='/update-profile' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><UpdateProfile /></ProtectedRoute>} />
         <Route path='/update-dp' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><UpdateProfilePicture /></ProtectedRoute>} />
+        <Route path='/change-password' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><ChangePassword /></ProtectedRoute>} />
         <Route path='/greenblogs/blog/:id' element={<Blog />} />
       </Routes>
       <Footer />

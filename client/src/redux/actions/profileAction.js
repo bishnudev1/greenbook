@@ -33,3 +33,19 @@ export const updateProfilePicture = (formdata) => async (dispatch) => {
         dispatch({ type: "updateUserPictureFailed", payload: error.response.data.message });
     }
 }
+
+export const changePassword = (password, newPassword) => async (dispatch) => {
+    try {
+        dispatch({ type: "changePasswordRequest" });
+        const { data } = await axios.put(`${backendUrl}/change-password`, { password, newPassword }, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
+        dispatch({ type: "changePasswordSuccess", payload: data });
+
+    } catch (error) {
+        dispatch({ type: "changePasswordFailed", payload: error.response.data.message });
+    }
+}

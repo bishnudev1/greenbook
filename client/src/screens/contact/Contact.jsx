@@ -29,6 +29,9 @@ const Contact = () => {
     const submitMessage = (e) => {
         e.preventDefault();
         dispatch(contact(name, email, message));
+        setName('');
+        setEmail('');
+        setMessage('')
     }
 
     return (
