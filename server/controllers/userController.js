@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import { sendToken } from "../utils/sendToken.js";
 import cloudinary from 'cloudinary';
 import getDataUri from "../utils/dataUri.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import crypto from 'crypto';
 
 export const register = async (req, res) => {
 
@@ -187,4 +189,66 @@ export const updatePassword = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+export const forgetPassword = async (req, res) => {
+
+    const { email } = req.body;
+
+    if (!email) return res.status(422).json({
+        success: false,
+        message: 'Fill all the details'
+    });
+
+    const isExist = await User.findOne({ email });
+
+    if (!isExist) return res.status(402).json({
+        success: false,
+        message: 'User with this email does not exists'
+    });
+
+    const resetToken = await isExist.getResetToken();
+
+    await isExist.save();
+
+    const url = `www.http://localhost:3000/reset-password/${resetToken}`
+
+    const message = `Click on the link to reset your account password ${url}`;
+
+    await sendEmail(isExist.email, "Greenbook Reset Password", message);
+
+    res.status(200).json({
+        success: true,
+        message: `A reset token link has been sent to your email at ${isExist.email}. It will valid only for 15 minutes.`
+    });
+}
+
+export const resetPassword = async (req, res) => {
+
+    const { token } = req.params;
+
+    const resetPasswordToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    const user = await User.findOne({
+        resetPasswordToken,
+        resetPasswordExpire: {
+            $gt: Date.now(),
+        },
+    });
+
+    if (!user) return res.status(401).json({
+        success: false,
+        message: "Token is invalid or expired. Try again."
+    });
+
+    user.password = req.body.password;
+    user.resetPasswordExpire = undefined;
+    user.resetPasswordToken = undefined;
+
+    await user.save();
+
+    res.status(200).json({
+        success: true,
+        message: `Your password has been changed successfully.`
+    });
 }

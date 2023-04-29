@@ -29,7 +29,7 @@ const Navbar = ({isAuthenticated, user}) => {
             "position": "sticky",
             "zIndex": 11,
             "top": 0
-        }} color={'white'} p={'4'}>
+        }} color={'green'} p={'4'}>
             <Stack spacing={'8'} direction={["column", "row"]} justifyContent={["center", "space-around"]} alignItems={'center'}>
                 <Link to={'/'}>
                     <HStack>

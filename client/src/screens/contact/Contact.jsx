@@ -36,7 +36,7 @@ const Contact = () => {
 
     return (
         <Box py={["4", "16"]} px={["4", "56"]} bgColor={'green.600'}>
-            <Heading textAlign={"center"} size={'2xl'} children='Have Queries ?' />
+            <Heading textAlign={"center"} size={'2xl'} color={"white"} children='Have Queries ?' />
             <VStack mt={"20"} justifyContent={"center"}
                 alignItems={["flex-start"]}
                 spacing={"6"}

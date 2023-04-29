@@ -25,6 +25,7 @@ const App = () => {
   const { isAuthenticated, user, error, message } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
+  console.log(isAuthenticated);
 
   useEffect(() => {
     if (error) {

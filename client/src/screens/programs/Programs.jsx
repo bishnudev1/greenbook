@@ -20,7 +20,7 @@ const WhatYouCanDo = ({ image, title, desc, linkAddress, buttonTitle }) => {
 const Programs = () => {
     return (
         <Box p={["4", "16"]} bgColor={'green.600'}>
-            <Heading textAlign={"center"} size={'2xl'} children='What you can do here ?' />
+            <Heading textAlign={"center"} size={'2xl'} color={"white"} children='What you can do here ?' />
             <Stack mt={'20'} display={"flex"} flexWrap={"wrap"} justifyContent={["center", "space-evenly"]} alignItems={["center", "flex-start"]} direction={["column", "row"]}>
                 <WhatYouCanDo image={Tree} title={'Plant Trees'} desc={"Plant trees by yourself and tag us the picture of it in our social or donate us to buy plants for the world's health."} linkAddress={''} buttonTitle={"Coming Soon"} />
                 <WhatYouCanDo image={Events} title={'Manage Events'} desc={'Held nature awareness events through us at your local society, school, college, office to aware peoples.'} linkAddress={''} buttonTitle={"Coming Soon"} />

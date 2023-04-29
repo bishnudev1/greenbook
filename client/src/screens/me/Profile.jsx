@@ -32,8 +32,8 @@ const Profile = ({ user }) => {
           <Text textAlign={["center", "left"]}>{user.user.email}</Text>
           <Text textAlign={["center", "left"]}>{`Joined on ${user.user.createdAt}`}</Text>
           <HStack justifyContent={"space-evenly"}>
-            <Link to={'/update-profile'}><Button variant={'outline'} colorScheme='green'>Edit Profile</Button></Link>
-            <Button onClick={logoutHandler} variant={'outline'} colorScheme='red'>Logout</Button>
+            <Link to={'/update-profile'}><Button variant={'outline'} color={"white"} colorScheme='green'>Edit Profile</Button></Link>
+            <Button onClick={logoutHandler} variant={'outline'} color={"red"} colorScheme='red'>Logout</Button>
           </HStack>
           <Stack p={"2"} spacing={"4"} direction={["column", "row"]}>
             <VStack spacing={"3"} alignItems={["center", "flex-start"]}>

@@ -4,7 +4,7 @@ import { SiLinkedin, SiFacebook, SiInstagram } from 'react-icons/si';
 
 const Footer = () => {
     return (
-        <Box bgColor={'blackAlpha.500'} p={["4", "16"]}>
+        <Box bgColor={'green.500'} p={["4", "16"]}>
             <Stack color={'white'} justifyContent={["center", "space-evenly"]} alignItems={"center"} direction={["column-reverse", "row"]}>
                 <VStack spacing={"4"} alignItems={["center", "flex-start"]}>
                     <Text textAlign={["center","left"]} fontSize={'lg'} fontFamily={'mono'}>Copyrighted by &copy;Greenbook. All rights reserved.</Text>

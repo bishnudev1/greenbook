@@ -7,9 +7,9 @@ const About = () => {
         <Box>
             <Box p={["4", "16"]} bgColor={'green.600'}>
                 <VStack spacing={["4", "8"]} alignItems={"center"} justifyContent={"center"} p={["4", "12"]}>
-                    <Heading textAlign={"center"} size={'2xl'} children='Who we are ?' />
+                    <Heading textAlign={"center"} size={'2xl'} color={"white"} children='Who we are ?' />
                     <Image src={whoarewe} boxSize={'sm'} objectFit={'contain'} />
-                    <Text width={["100%", '3xl']} textAlign={"center"} fontFamily={"body"} fontSize={["2xl", "3xl"]}>
+                    <Text width={["100%", '3xl']} textAlign={"center"} color={"white"} fontFamily={"body"} fontSize={["2xl", "3xl"]}>
                         We are a new unicorn startups here to provide essential knowledge and tips how we can save our <b>Mother Nature</b> and make our <b>Earth</b> sweetest again for living.
                     </Text>
                 </VStack>

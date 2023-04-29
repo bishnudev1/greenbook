@@ -1,4 +1,4 @@
-#loader{
+#loader {
     height: 50px;
     width: 50px;
     border-radius: 150%;
@@ -7,29 +7,25 @@
     animation: spin 0.5s infinite ease-in-out;
 }
 
-.home-bg{
-    opacity: 0.7;
-}
-
-@keyframes spin{
-    to{
+@keyframes spin {
+    to {
         transform: rotate(360deg);
     }
 }
 
 .navbar-blur {
-    background-color:transparent;
+    background-color: transparent;
     backdrop-filter: blur(5px);
     background-image: none;
-  }
+    color: white;
+}
 
-.navbar{
-    background-image: url("../../assets/images/bg.jpg");
-    background-repeat: no-repeat;
+.navbar {
+    background-color: transparent;
 }
 
 
-.whatyoucando{
+.whatyoucando {
     padding: 15px;
     border: 3px none white;
     border-radius: 10px;
@@ -37,30 +33,30 @@
     animation: glowing 1s infinite ease-in-out alternate;
 }
 
-.whatyoucando:hover{
+.whatyoucando:hover {
     transform: translateY(-10px);
 }
 
-#founder{
+#founder {
     animation: floating 1s infinite ease-in-out alternate;
 }
 
-.profile-btn{
+.profile-btn {
     transition: 0.5s all;
 }
 
-.profile-btn:hover{
+.profile-btn:hover {
     transform: translateX(5px);
 }
 
-@keyframes floating{
-    to{
+@keyframes floating {
+    to {
         transform: translateY(10px);
     }
 }
 
-@keyframes glowing{
-    to{
+@keyframes glowing {
+    to {
         box-shadow: 0 0 30px 1px white;
     }
 }

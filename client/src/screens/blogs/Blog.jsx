@@ -16,11 +16,11 @@ const Blog = () => {
                     :
                     <VStack spacing={"10"} px={["4", "8"]} alignItems={"flex-start"}>
                         <Image objectFit={'contain'} src={blogData.image.url} />
-                        <Heading textAlign={"left"} color={'white'} size={"2xl"}>{blogData.title}</Heading>
-                        <Text fontFamily={"inherit"} fontWeight={"bold"} color={'white'} fontSize={["xl","2xl"]}>{blogData.desc}</Text>
+                        <Heading textAlign={"left"} color={'green.600'} size={"2xl"}>{blogData.title}</Heading>
+                        <Text fontFamily={"inherit"} fontWeight={"bold"} color={'green.500'} fontSize={["xl","2xl"]}>{blogData.desc}</Text>
                         <HStack pt={["4", "6"]} spacing={["4", "8"]} justifyContent={"space-evenly"} alignItems={["center", "flex-end"]}>
-                            <Text fontWeight={"bold"} color={'white'} fontFamily={"inherit"}>{`Published on ${blogData.createdAt}`}</Text>
-                            <Text fontWeight={"bold"} color={'white'} fontFamily={"inherit"}>{`Written by ${blogData.createdBy}`}</Text>
+                            <Text fontWeight={"bold"} color={'green.400'} fontFamily={"inherit"}>{`Published on ${blogData.createdAt}`}</Text>
+                            <Text fontWeight={"bold"} color={'green.400'} fontFamily={"inherit"}>{`Written by ${blogData.createdBy}`}</Text>
                         </HStack>
                         <HStack width={["100%", "unset"]} spacing={["4", "8"]} justifyContent={"space-evenly"}>
                             <a href='www.google.co.in'><SiFacebook size={'40'} color='skyblue' /></a>
