@@ -33,7 +33,7 @@ const Login = () => {
           <Input value={password} onChange={(e) => setPassword(e.target.value)} type='text' placeholder='*******' />
         </VStack>
         <VStack width={"100%"} alignItems={"center"} spacing={'2'}>
-          <Button variant={'link'} colorScheme='green' size={'lg'}>Forget Password ?</Button>
+          <Link to={'/forget-password'}><Button variant={'link'} colorScheme='green' size={'lg'}>Forget Password ?</Button></Link>
           <Button isLoading={loading} onClick={submitHandler} variant={'ghost'} size={'lg'} colorScheme='white'>Login</Button>
         </VStack>
         <HStack justifyContent={"space-evenly"} alignItems={"center"} spacing={'4'}>

@@ -8,7 +8,7 @@ const Founder = () => {
     <Box p={["4", "16"]} bgColor={'white'}>
     <Heading textAlign={"center"} color={'green.600'} size={'2xl'} children='Founder' />
     <Stack mt={["0", "20"]} justifyContent={["center", "space-evenly"]} alignItems={"center"} direction={["column", "row"]}>
-        <Image id='founder' src={FounderImg} boxSize={"sm"} objectFit={'contain'} />
+        <Image src={FounderImg} boxSize={"sm"} objectFit={'contain'} />
         <VStack
         color={'blackAlpha.800'}
             w={["100%", "md"]}

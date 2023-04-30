@@ -8,43 +8,50 @@ import crypto from 'crypto';
 
 export const register = async (req, res) => {
 
-    const { name, email, password } = req.body;
+    try {
+        const { name, email, password } = req.body;
 
-    if (!name || !email || !password) return res.status(422).json({
-        success: false,
-        message: 'Fill all the details'
-    });
+        if (!name || !email || !password) return res.status(422).json({
+            success: false,
+            message: 'Fill all the details'
+        });
 
 
-    const file = req.file;
+        const file = req.file;
 
-    if (!file) return res.status(422).json({
-        success: false,
-        message: 'Please upload your picture'
-    });
+        if (!file) return res.status(422).json({
+            success: false,
+            message: 'Please upload your picture'
+        });
 
-    const fileUri = getDataUri(file);
+        const fileUri = getDataUri(file);
 
-    const isExist = await User.findOne({ email });
+        const isExist = await User.findOne({ email });
 
-    if (isExist) return res.status(402).json({
-        success: false,
-        message: 'User with this email is already exists'
-    });
+        if (isExist) return res.status(402).json({
+            success: false,
+            message: 'User with this email is already exists'
+        });
 
-    const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
+        const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
-    const newUser = await User.create({
-        name,
-        email,
-        password,
-        avatar: {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url
-        }
-    });
+        const newUser = await User.create({
+            name,
+            email,
+            password,
+            avatar: {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            }
+        });
 
-    sendToken(res, newUser, `New user has added ${newUser.name}`, 201);
+        sendToken(res, newUser, `New user has added ${newUser.name}`, 201);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
 }
 
 export const login = async (req, res) => {

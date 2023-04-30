@@ -24,7 +24,7 @@ const Home = () => {
                         <Text  width={["100%","xl"]} textAlign={["center","left"]} fontWeight={"bold"} fontFamily={'body'} fontSize={'xl'} children="This is a community which provides free hands-on training in various fields of computer science and have an inclusive community focusing on a learn by doing approach." />
                         <Button color={'white'} variant={'solid'} colorScheme='green' size={'lg'} children='Contributions' />
                     </VStack>
-                    <Image src={HomeLogo} objectFit={"contain"} boxSize={"sm"}/>
+                    <Image id='founder' src={HomeLogo} objectFit={"contain"} boxSize={"sm"}/>
                 </Stack>
             </Box>
             <About />

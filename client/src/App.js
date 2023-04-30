@@ -19,6 +19,8 @@ import UpdateProfile from './screens/me/UpdateProfile';
 import UpdateProfilePicture from './screens/me/UpdateProfilePicture';
 import { loadBlogs } from './redux/actions/blogAction';
 import ChangePassword from './screens/me/ChangePassword';
+import ForgetPassword from './screens/auth/forgetpassword/ForgetPassword';
+import ResetPassword from './screens/auth/resetpassword/ResetPassword';
 
 const App = () => {
 
@@ -53,6 +55,12 @@ const App = () => {
         </ProtectedRoute>} />
         <Route path='/login' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect='/me'>
           <Login />
+        </ProtectedRoute>} />
+        <Route path='/forget-password' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect='/me'>
+          <ForgetPassword />
+        </ProtectedRoute>} />
+        <Route path='/reset-password/:token' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect='/me'>
+          <ResetPassword />
         </ProtectedRoute>} />
         <Route path='/register' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect='/me'>
           <Register />

@@ -60,3 +60,35 @@ export const logout = () => async (dispatch) => {
         dispatch({ type: "logoutFailed", payload: error.response.data.message });
     }
 }
+
+export const forgetPassword = (email) => async (dispatch) => {
+    try {
+        dispatch({ type: "forgetPasswordRequest" });
+        const { data } = await axios.post(`${backendUrl}/forget-password`, { email }, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,
+        });
+        dispatch({ type: "forgetPasswordSuccess", payload: data });
+
+    } catch (error) {
+        dispatch({ type: "forgetPasswordFailed", payload: error.response.data.message });
+    }
+}
+
+export const resetPassword = (token, password) => async (dispatch) => {
+    try {
+        dispatch({ type: "resetPasswordRequest" });
+        const { data } = await axios.put(`${backendUrl}/reset-password/${token}`, { password }, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
+        dispatch({ type: "resetPasswordSuccess", payload: data });
+
+    } catch (error) {
+        dispatch({ type: "resetPasswordFailed", payload: error.response.data.message });
+    }
+}
