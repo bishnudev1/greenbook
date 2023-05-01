@@ -3,7 +3,7 @@ import { createBlog, deleteBlog, getAllBlogs, getBlog } from '../controllers/blo
 import { Authentication } from '../middlewares/auth.js';
 import singleUpload from '../middlewares/multer.js';
 
-const router = express();
+const router = express.Router();
 
 
 router.route('/blogs').get(getAllBlogs);

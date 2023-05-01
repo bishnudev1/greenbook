@@ -45,11 +45,12 @@ export const register = async (req, res) => {
             }
         });
 
+
         sendToken(res, newUser, `New user has added ${newUser.name}`, 201);
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Internal Server Error"
+            message: error
         });
     }
 }
@@ -97,14 +98,21 @@ export const myProfile = async (req, res) => {
 
         const user = await User.findById(req.user._id);
 
-        if (!user) return new Error('Not valid user');
+        if (!user) return res.status(401).json({
+            success: false,
+            message: "Not logged in"
+        });
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             user
         });
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: error
+        });
     }
 }
 
@@ -126,7 +134,10 @@ export const updateProfile = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            success: true,
+            message: error
+        });
     }
 }
 
@@ -161,7 +172,10 @@ export const updateProfilePicture = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            success: true,
+            message: error
+        });
     }
 }
 
@@ -194,7 +208,10 @@ export const updatePassword = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            success: true,
+            message: error
+        });
     }
 }
 

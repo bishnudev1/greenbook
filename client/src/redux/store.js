@@ -3,13 +3,15 @@ import { userReducer } from "./reducers/userReducer";
 import { otherReducer } from "./reducers/otherReducer";
 import { profileReducer } from "./reducers/profileReducer";
 import { blogReducer } from "./reducers/blogReducer";
+import { orderReducer } from "./reducers/orderReducer";
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
         other: otherReducer,
         profile: profileReducer,
-        blog: blogReducer
+        blog: blogReducer,
+        order: orderReducer
     },
 });
 

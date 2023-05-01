@@ -34,7 +34,7 @@ const Navbar = ({ isAuthenticated, user }) => {
                 <Link to={'/'}>
                     <HStack>
                         <GiPlantsAndAnimals size={'30'} />
-                        <Heading size={'lg'} fontFamily={"serif"}>Greenbook</Heading>
+                        <Heading size={'md'} fontFamily={"serif"}>Greenbook</Heading>
                     </HStack></Link>
                 <HStack width={["100%", "unset"]} justifyContent={["space-evenly", "unset"]} spacing={['3', '6']}>
                     <Link to={'/check-weather'}>                    <Button _hover={{ "color": "green" }} fontFamily={"heading"} size={["sm", "md"]} variant={'link'} fontSize={["sm", "md"]} colorScheme='white'>Weather</Button></Link>

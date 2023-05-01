@@ -8,7 +8,7 @@ export const Authentication = async (req, res, next) => {
         if (!token) {
             res.status(400).json({
                 success: true,
-                message: "You are not signed it."
+                message: "You are not signed it. Try login first."
             });
             next();
         }

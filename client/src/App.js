@@ -21,13 +21,13 @@ import { loadBlogs } from './redux/actions/blogAction';
 import ChangePassword from './screens/me/ChangePassword';
 import ForgetPassword from './screens/auth/forgetpassword/ForgetPassword';
 import ResetPassword from './screens/auth/resetpassword/ResetPassword';
+import OrderPlant from './screens/plant/OrderPlant';
+import OrderSuccessful from './screens/plant/OrderSuccessful';
 
 const App = () => {
 
   const { isAuthenticated, user, error, message } = useSelector(state => state.user);
   const dispatch = useDispatch();
-
-  console.log(isAuthenticated);
 
   useEffect(() => {
     if (error) {
@@ -72,11 +72,13 @@ const App = () => {
         <Route path='/update-dp' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><UpdateProfilePicture /></ProtectedRoute>} />
         <Route path='/change-password' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><ChangePassword /></ProtectedRoute>} />
         <Route path='/greenblogs/blog/:id' element={<Blog />} />
+        <Route path='/order-plant' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><OrderPlant /></ProtectedRoute>} />
+        <Route path='/order-successful' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><OrderSuccessful /></ProtectedRoute>} />
       </Routes>
       <Footer />
       <Toaster />
     </Router>
-  )
+  );
 }
 
 export default App
