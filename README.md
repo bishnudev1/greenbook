@@ -56,4 +56,30 @@
 docker run -p greenbook 5000:5000
 ```
 
+### API Endpoints
+
+| User Endpoint | Url |
+| --- | --- |
+| Base | /api/v1 |
+| User Profile | /api/v1/me |
+| Register | /api/v1/register |
+| Login | /api/v1/login |
+| Logout | /api/v1/logout |
+| Update Profile | /api/v1/update-profile |
+| Forget Password | /api/v1/forget-password |
+| Reset Password | /api/v1/reset-password/:token |
+| Update DP | /api/v1/update-dp |
+
+| Article Endpoint | Url |
+| --- | --- |
+| All Articles | /api/v1/blogs |
+| Article | /api/v1/blog/:id |
+| Create Article | /api/v1/create-blog |
+| Delete Article | /api/v1/delete-blog/:id |
+
+| Other Endpoint | Url |
+| --- | --- |
+| Contact | /api/v1/contact |
+
+
 ### Note that this project is still far from done. I'm still working in it and have a plan for future. Feel free to contribute in. Thank you 🙂.
