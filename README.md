@@ -89,9 +89,9 @@ docker run -p greenbook 5000:5000
 
 ## Current Issues
 
-- Automatically redirects to /me after /order-plant instead of /order-successful after successfuly payment, Probably because of <ProtectedRoute> component.
-- Some issues with cloudinary in Server, does not saving images at /register, /update-profile & /create-blog endpoints. Throwing internal server error (Catch block).
-- <Toaster /> in App.js is giving DOM error while rendering the entire app.
+- Automatically redirects to /me after /order-plant instead of /order-successful after successfuly payment, Probably because of <b>ProtectedRoute</b> component.
+- Some issues with <b>Cloudinary</b> in Server, does not saving images at /register, /update-profile & /create-blog endpoints. Throwing internal server error (Catch block).
+- <b>Toaster</b> in App.js is giving DOM error while rendering the entire app.
 
 
 ### Note that this project is still far from done. I'm still working in it and have a plan for future. Feel free to contribute in. Thank you 🙂.
