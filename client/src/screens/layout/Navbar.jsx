@@ -30,7 +30,7 @@ const Navbar = ({ isAuthenticated, user }) => {
             "zIndex": 11,
             "top": 0
         }} color={"green.800"} p={'4'}>
-            <Stack spacing={'8'} direction={["column", "row"]} justifyContent={["center", "space-around"]} alignItems={'center'}>
+            <Stack spacing={'8'} direction={["column", "row"]} justifyContent={["center", "space-between"]} alignItems={'center'}>
                 <Link to={'/'}>
                     <HStack>
                         <GiPlantsAndAnimals size={'30'} />

@@ -17,12 +17,13 @@ const Home = () => {
                 minHeight={"80vh"}
                 py={["4", "20"]}
                 px={["4","50"]}
+                bg={"white"}
             >
                 <Stack p={["2","20"]} justifyContent={["center","space-between"]} alignItems={"center"} direction={["column", "row"]} width={"100%"} color={'green'} spacing={'6'}>
                     <VStack
                     spacing={"6"} width={"100%"} justifyContent={["center", "space-between"]} alignItems={["center", "flex-start"]}>
                         <Text  width={["100%","xl"]} textAlign={["center","left"]} fontWeight={"bold"} fontFamily={'body'} fontSize={'xl'} children="This is a community which provides free hands-on training in various fields of computer science and have an inclusive community focusing on a learn by doing approach." />
-                        <Button color={'white'} variant={'solid'} colorScheme='green' size={'lg'} children='Contributions' />
+                        <Button color={'green.800'} variant={'solid'} colorScheme='green' size={'lg'} children='Contributions' />
                     </VStack>
                     <Image id='founder' src={HomeLogo} objectFit={"contain"} boxSize={"sm"}/>
                 </Stack>

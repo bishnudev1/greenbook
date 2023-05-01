@@ -1,8 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 const app = express();
 
@@ -10,14 +8,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-app.use(express.static(new URL('public', import.meta.url).toString()));
-
-app.get('*', (req, res) => {
-  res.sendFile(new URL('public/index.html', import.meta.url));
-});
 
 const allowedOrigins = ['http://localhost:3000'];
 

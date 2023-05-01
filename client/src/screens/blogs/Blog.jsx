@@ -18,7 +18,7 @@ const Blog = () => {
     const blogData = location.state ? location.state : null;
 
     return (
-        <Container minH={"100vh"} maxW={"container.xl"} p={["4", "16"]}>
+        <Container bg={"white"} minH={"100vh"} maxW={"100%"} p={["4", "16"]}>
             {
                 blogData === null ? <Heading textAlign={"center"} size={"lg"}>Loading...</Heading>
                     :
