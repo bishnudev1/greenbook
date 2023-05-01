@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="images/greenbook.png" title="greenbook">
+  <img src="images/logo.png" title="greenbook">
 </p>
 
 ## Techstack
