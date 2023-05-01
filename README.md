@@ -35,13 +35,25 @@
 ```bash
   npm i
 ```
-- Create an config.env file in <b>/config</b> and add a <b>PORT</b> and a <b>MONGO_URI</b> in it.
-- Set a JWT secret key <b>SECRET_KEY</b> in env file.
-- Create a free account in Cloudinary and get the <b>CLOUDINARY_CLOUD_NAME</b>, <b>CLOUDINARY_API_KEY</b> & <b>CLOUDINARY_API_SECRET</b> and set it to env file.
+### Environment Variables needs to be added
+- PORT
+- MONGO_URI
+- SECRET_KEY
+- CLOUDINARY_CLOUD_NAME
+- CLOUDINARY_API_KEY
+- CLOUDINARY_API_SECRET
+- SMTP_HOST
+- SMTP_USER
+- SMTP_PORT
+- SMTP_PASS
+
 - Run the project using in both <b>Client</b> & <b>Server</b> directory by 
 ```bash
   npm start
 ```
-
+### Start the docker container for API testing
+```bash
+docker run -p greenbook 5000:5000
+```
 
 ### Note that this project is still far from done. I'm still working in it and have a plan for future. Feel free to contribute in. Thank you 🙂.
