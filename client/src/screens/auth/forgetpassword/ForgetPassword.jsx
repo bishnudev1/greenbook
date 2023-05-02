@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, VStack, Input, FormLabel } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import toast from 'react-hot-toast';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { forgetPassword } from '../../../redux/actions/userAction';
 
 const ForgetPassword = () => {
@@ -19,13 +20,29 @@ const ForgetPassword = () => {
     }
 
     useEffect(() => {
-        if (message) {
-            toast.success(message);
-            dispatch({ type: "clearMessage" });
-        }
         if (error) {
-            toast.error(error);
-            dispatch({ type: "clearError" });
+            toast.error(error, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            dispatch({ type: "clearError" })
+        }
+        if (message) {
+            toast.success(message, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            dispatch({ type: "clearMessage" });
         }
     }, [dispatch, error, message])
 

@@ -98,18 +98,12 @@ export const myProfile = async (req, res) => {
 
         const user = await User.findById(req.user._id);
 
-        if (!user) return res.status(401).json({
-            success: false,
-            message: "Not logged in"
-        });
-
-        return res.status(200).json({
+        res.status(200).json({
             success: true,
             user
         });
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({
+        res.status(500).json({
             success: false,
             message: error
         });

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Box, Heading, Button, VStack, Input, Textarea, FormLabel } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { contact } from '../../redux/actions/otherAction';
-import toast from 'react-hot-toast';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 
 const Contact = () => {
@@ -17,13 +18,29 @@ const Contact = () => {
 
     useEffect(() => {
         if (error) {
-            toast.error(error);
+            toast.error(error, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
             dispatch({ type: "clearError" })
-        }
-        if (success) {
-            toast.success(success);
-            dispatch({ type: "clearMessage" })
-        }
+          }
+          if (message) {
+            toast.success(message, {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            dispatch({ type: "clearMessage" });
+          }
     }, [dispatch, error, success])
 
     const submitMessage = (e) => {

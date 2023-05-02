@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Box, Heading, Button, VStack, Input, FormLabel } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBlog } from '../../redux/actions/blogAction';
-import toast from 'react-hot-toast';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -48,14 +49,29 @@ const CreateBlog = () => {
 
     useEffect(() => {
         if (error) {
-            toast.error(error);
+            toast.error(error, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
             dispatch({ type: "clearError" })
-        }
-        if (message) {
-            toast.success(message);
-            navigate('/greenblogs');
+          }
+          if (message) {
+            toast.success(message, {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
             dispatch({ type: "clearMessage" });
-        }
+          }
     }, [dispatch, error, message]);
 
 

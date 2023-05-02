@@ -7,11 +7,12 @@ import Register from './screens/auth/register/Register';
 import Login from './screens/auth/login/Login';
 import Profile from './screens/me/Profile';
 import Blogs from './screens/blogs/Blogs';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Blog from './screens/blogs/Blog';
 import CreateBlog from './screens/blogs/CreateBlog';
 import Weather from './screens/weather/Weather';
 import { useSelector } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './redux/actions/userAction';
 import { ProtectedRoute } from 'protected-route-react';
@@ -31,11 +32,27 @@ const App = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(error);
+      toast.error(error, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       dispatch({ type: "clearError" })
     }
     if (message) {
-      toast.success(message);
+      toast.success(message, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       dispatch({ type: "clearMessage" });
     }
   }, [dispatch, error, message]);
@@ -44,9 +61,10 @@ const App = () => {
   useEffect(() => {
     dispatch(loadUser());
     dispatch(loadBlogs());
-  }, [dispatch]);
+  }, []);
   return (
     <Router>
+      <ToastContainer />
       <Navbar isAuthenticated={isAuthenticated} />
       <Routes>
         <Route exact path='/' element={<Home />} />
@@ -76,7 +94,6 @@ const App = () => {
         <Route path='/order-successful' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><OrderSuccessful /></ProtectedRoute>} />
       </Routes>
       <Footer />
-      <Toaster />
     </Router>
   );
 }

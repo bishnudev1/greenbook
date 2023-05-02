@@ -6,11 +6,10 @@ export const Authentication = async (req, res, next) => {
         const { token } = req.cookies;
 
         if (!token) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: true,
-                message: "You are not signed it. Try login first."
+                message: "You are not signed it."
             });
-            next();
         }
         const verifyUser = jwt.verify(token, process.env.SECRET_KEY);
         const user = await User.findOne({ _id: verifyUser._id });

@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { Button } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { orderPlant } from '../../redux/actions/orderAction';
-import toast from 'react-hot-toast';
-import Axios from 'axios';
-import { backendUrl } from '../../redux/store';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OrderPlant = () => {
 
@@ -14,15 +13,29 @@ const OrderPlant = () => {
 
     useEffect(() => {
         if (error) {
-            toast.error(error);
-            console.log(error);
-            dispatch({ type: "clearError" });
-        }
-        if (message) {
-            toast.success(message);
-            console.log(message);
+            toast.error(error, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            dispatch({ type: "clearError" })
+          }
+          if (message) {
+            toast.success(message, {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
             dispatch({ type: "clearMessage" });
-        }
+          }
     }, [dispatch, error, message])
 
     const orderPlantHandler = async (e) => {
