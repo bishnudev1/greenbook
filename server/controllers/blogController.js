@@ -1,6 +1,7 @@
 import { Blog } from "../model/blog.js";
 import getDataUri from "../utils/dataUri.js";
 import cloudinary from 'cloudinary';
+import admin from 'firebase-admin';
 
 export const getAllBlogs = async (req, res) => {
     try {
@@ -17,6 +18,8 @@ export const getAllBlogs = async (req, res) => {
 
 export const getBlog = async (req, res) => {
     try {
+
+
         const { id } = req.params;
 
         const blog = await Blog.findById({ _id: id });
@@ -25,6 +28,7 @@ export const getBlog = async (req, res) => {
             success: true,
             message: "Something went wrong !"
         });
+
 
         res.status(200).json({
             success: true,
@@ -62,6 +66,8 @@ export const deleteBlog = async (req, res) => {
 
 export const createBlog = async (req, res) => {
     try {
+
+        const bucket = admin.storage().bucket();
         const { title, desc, createdBy } = req.body;
 
         if (!title || !desc || !createdBy) return res.status(422).json({
@@ -76,25 +82,44 @@ export const createBlog = async (req, res) => {
             message: 'Please upload any article image'
         });
 
-        const fileUri = getDataUri(file);
+        const blob = bucket.file(file.originalname);
 
-        const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
+        const blobStream = blob.createWriteStream();
 
-        await Blog.create({
-            title,
-            desc,
-            createdBy,
-            image: {
-                public_id: myCloud.public_id,
-                url: myCloud.secure_url
-            },
-            user: req.user._id
+        blobStream.on('error', (err) => {
+            res.status(500).json({
+                success: false,
+                message: err
+            });
         });
 
-        res.status(200).json({
-            success: true,
-            message: "Your blog has been submitted. Thanks."
+        blobStream.on('finish', async () => {
+            try {
+
+                const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${blob.name}?alt=media`;
+
+                await Blog.create({
+                    title,
+                    desc,
+                    createdBy,
+                    image: {
+                        url: publicUrl
+                    },
+                    user: req.user._id
+                });
+                res.status(200).json({
+                    success: true,
+                    message: "Your article has been submitted. Thanks."
+                });
+            } catch (error) {
+                res.status(500).json({
+                    success: false,
+                    message: error
+                });
+            }
         });
+        blobStream.write(file.buffer);
+        blobStream.end();
     } catch (error) {
         console.log(error);
     }

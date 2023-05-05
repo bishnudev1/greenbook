@@ -41,6 +41,17 @@ const OrderPlant = () => {
     }
   }, [dispatch, error, message])
 
+
+  const orderRiseHandler = e => {
+    setPlant(plant + 1);
+  }
+
+  const orderDownHandler = e => {
+    if (plant >= 1) {
+      setPlant(plant - 1);
+    }
+  }
+
   const orderPlantHandler = async (e) => {
     e.preventDefault();
     dispatch(orderPlant(plant, 10.99));
@@ -53,10 +64,11 @@ const OrderPlant = () => {
         <VStack alignItems={["center", "flex-start"]} spacing={["4", "6"]}>
           <Heading>Small Plant</Heading>
           <Text fontSize={"lg"} fontFamily={"revert"}>Two pieces small sized fresh Albizia Lebbeck</Text>
+          <Text fontSize={"xl"}>${`${(plant * 10.98).toFixed(2)}`}</Text>
           <HStack alignItems={"center"} justifyContent={"flex-start"} spacing={"4"}>
-            <Button onClick={() => setPlant(plant === 1 ? 1 : plant - 1)} variant={'link'}><GrSubtract /></Button>
+            <Button onClick={orderDownHandler} variant={'link'}><GrSubtract /></Button>
             <Text>{plant}</Text>
-            <Button onClick={() => setPlant(plant + 1)} variant={'link'}><GrAdd /></Button>
+            <Button onClick={orderRiseHandler} variant={'link'}><GrAdd /></Button>
           </HStack>
           <Button isLoading={loading} onClick={orderPlantHandler} variant={'solid'} size={'lg'} colorScheme='green'>Donate Now</Button>
         </VStack>

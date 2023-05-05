@@ -25,7 +25,7 @@ const Blogs = () => {
             toast.success(message);
             dispatch({ type: "clearMessage" })
         }
-    }, [dispatch, loading, error, message])
+    }, [dispatch, loading, error, message, blogs])
 
     useEffect(() => {
         dispatch(loadBlogs());

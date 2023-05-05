@@ -6,60 +6,67 @@ import getDataUri from "../utils/dataUri.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import crypto from 'crypto';
 import { unLinkFile } from "../middlewares/multer.js";
+import admin from 'firebase-admin';
 
 export const register = async (req, res) => {
+    const { name, email, password } = req.body;
 
-    try {
-        const { name, email, password } = req.body;
+    if (!name || !email || !password) return res.status(422).json({
+        success: false,
+        message: 'Fill all the details'
+    });
 
-        if (!name || !email || !password) return res.status(422).json({
-            success: false,
-            message: 'Fill all the details'
-        });
+    const bucket = admin.storage().bucket();
 
+    const file = req.file;
 
-        const file = req.file;
+    if (!file) return res.status(422).json({
+        success: false,
+        message: 'Please upload your picture'
+    });
 
-        if (!file) return res.status(422).json({
-            success: false,
-            message: 'Please upload your picture'
-        });
+    const isExist = await User.findOne({ email });
 
-        console.log(file.filename);
+    if (isExist) return res.status(402).json({
+        success: false,
+        message: 'User with this email is already exists'
+    });
 
-        //const fileUri = getDataUri(file);
+    const blob = bucket.file(file.originalname);
 
-        const isExist = await User.findOne({ email });
+    const blobStream = blob.createWriteStream();
 
-        if (isExist) return res.status(402).json({
-            success: false,
-            message: 'User with this email is already exists'
-        });
-
-        const myCloud = await cloudinary.v2.uploader.upload('./uploads/' + file.filename, {
-            timeout: 12000
-        });
-
-        const newUser = await User.create({
-            name,
-            email,
-            password,
-            avatar: {
-                public_id: myCloud.public_id,
-                url: myCloud.secure_url
-            }
-        });
-
-        unLinkFile(file.filename);
-
-
-        sendToken(res, newUser, `New user has added ${newUser.name}`, 201);
-    } catch (error) {
+    blobStream.on('error', (err) => {
         res.status(500).json({
             success: false,
-            message: error
+            message: err
         });
-    }
+    });
+
+
+    blobStream.on('finish', async () => {
+        try {
+
+            const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${blob.name}?alt=media`;
+
+            const newUser = await User.create({
+                name,
+                email,
+                password,
+                avatar: {
+                    url: publicUrl
+                }
+            });
+            sendToken(res, newUser, `Your account has been created successfully ${name}`, 201);
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error
+            });
+        }
+    });
+    blobStream.write(file.buffer);
+    blobStream.end();
 }
 
 export const login = async (req, res) => {
@@ -152,6 +159,8 @@ export const updateProfile = async (req, res) => {
 export const updateProfilePicture = async (req, res) => {
     try {
 
+        const bucket = admin.storage().bucket();
+
         const user = await User.findById(req.user._id);
 
         const file = req.file;
@@ -161,23 +170,39 @@ export const updateProfilePicture = async (req, res) => {
             message: "Please upload your picture"
         });
 
-        //const fileUri = getDataUri(file);
 
-        console.log(file);
+        const blob = bucket.file(file.originalname);
 
-        const myCloud = await cloudinary.v2.uploader.upload(file.filename);
+        const blobStream = blob.createWriteStream();
 
-        await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+        blobStream.on('error', (err) => {
+            res.status(500).json({
+                success: false,
+                message: err
+            });
+        });
+
+        blobStream.on('finish', async () => {
+            try {
+
+                const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${blob.name}?alt=media`;
+
+                user.avatar = {
+                    url: publicUrl
+                }
+
+                await user.save();
+            } catch (error) {
+                res.status(500).json({
+                    success: false,
+                    message: error
+                });
+            }
+        });
 
 
-        user.avatar = {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url
-        }
-
-        await user.save();
-
-        unLinkFile(file.filename);
+        blobStream.write(file.buffer);
+        blobStream.end();
 
         res.status(200).json({
             success: true,

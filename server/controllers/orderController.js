@@ -8,7 +8,7 @@ export const orderPlant = async (req, res) => {
         const { item, amount } = req.body;
 
         const order = await razorpayInstance.orders.create({
-            amount: Number(amount * 80 * 100),
+            amount: Number((amount * item) * 80 * 100),
             currency: "INR"
         });
 

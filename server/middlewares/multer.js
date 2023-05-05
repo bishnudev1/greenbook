@@ -5,7 +5,9 @@ import util from "util";
 
 const uf = util.promisify(fs.unlink);
 
-const singleUpload = multer({ dest: "uploads/" }).single("file");
+const storage = multer.memoryStorage();
+
+const singleUpload = multer({ storage }).single("file");
 
 export const unLinkFile = async (path) => {
 

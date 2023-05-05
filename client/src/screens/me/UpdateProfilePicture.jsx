@@ -70,7 +70,7 @@ const UpdateProfilePicture = () => {
                 progress: undefined,
             });
             dispatch({ type: "clearMessage" });
-            navigate('/me');
+            navigate('/');
         }
     }, [dispatch, error, message])
 

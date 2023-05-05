@@ -90,8 +90,8 @@ const App = () => {
         <Route path='/update-dp' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><UpdateProfilePicture /></ProtectedRoute>} />
         <Route path='/change-password' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><ChangePassword /></ProtectedRoute>} />
         <Route path='/greenblogs/blog/:id' element={<Blog />} />
-        <Route path='/order-plant' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><OrderPlant /></ProtectedRoute>} />
-        <Route path='/order-successful' element={<ProtectedRoute isAuthenticated={isAuthenticated} redirect='/login'><OrderSuccessful /></ProtectedRoute>} />
+        <Route path='/order-plant' element={<OrderPlant />} />
+        <Route path='/order-successful' element={<OrderSuccessful />} />
       </Routes>
       <Footer />
     </Router>

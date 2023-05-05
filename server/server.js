@@ -2,12 +2,24 @@ import app from "./app.js";
 import { config } from "dotenv";
 import { v2 as cloudinaryV2 } from 'cloudinary';
 import Razorpay from 'razorpay';
+import admin from 'firebase-admin';
+import serviceAccount from './firebase/serviceAccountKey.json' assert { type: "json" };
+
 
 config({
     path: "./config/config.env"
 });
 
 import { connectDB } from "./config/conn.js";
+
+
+const credential = admin.credential.cert(serviceAccount);
+
+admin.initializeApp({
+    credential: credential,
+    storageBucket: "gs://greenbook-52395.appspot.com"
+});
+
 
 cloudinaryV2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
