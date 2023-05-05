@@ -1,6 +1,4 @@
 import { Blog } from "../model/blog.js";
-import getDataUri from "../utils/dataUri.js";
-import cloudinary from 'cloudinary';
 import admin from 'firebase-admin';
 
 export const getAllBlogs = async (req, res) => {

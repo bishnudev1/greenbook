@@ -47,7 +47,7 @@ const OrderPlant = () => {
   }
 
   const orderDownHandler = e => {
-    if (plant >= 1) {
+    if (plant > 1) {
       setPlant(plant - 1);
     }
   }

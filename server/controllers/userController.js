@@ -1,11 +1,8 @@
 import { User } from "../model/user.js";
 import bcrypt from 'bcrypt';
 import { sendToken } from "../utils/sendToken.js";
-import cloudinary from 'cloudinary';
-import getDataUri from "../utils/dataUri.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import crypto from 'crypto';
-import { unLinkFile } from "../middlewares/multer.js";
 import admin from 'firebase-admin';
 
 export const register = async (req, res) => {
