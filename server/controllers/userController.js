@@ -5,6 +5,7 @@ import cloudinary from 'cloudinary';
 import getDataUri from "../utils/dataUri.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import crypto from 'crypto';
+import { unLinkFile } from "../middlewares/multer.js";
 
 export const register = async (req, res) => {
 
@@ -24,7 +25,9 @@ export const register = async (req, res) => {
             message: 'Please upload your picture'
         });
 
-        const fileUri = getDataUri(file);
+        console.log(file.filename);
+
+        //const fileUri = getDataUri(file);
 
         const isExist = await User.findOne({ email });
 
@@ -33,7 +36,9 @@ export const register = async (req, res) => {
             message: 'User with this email is already exists'
         });
 
-        const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
+        const myCloud = await cloudinary.v2.uploader.upload('./uploads/' + file.filename, {
+            timeout: 12000
+        });
 
         const newUser = await User.create({
             name,
@@ -44,6 +49,8 @@ export const register = async (req, res) => {
                 url: myCloud.secure_url
             }
         });
+
+        unLinkFile(file.filename);
 
 
         sendToken(res, newUser, `New user has added ${newUser.name}`, 201);
@@ -115,6 +122,13 @@ export const updateProfile = async (req, res) => {
 
         const { name, email } = req.body;
 
+        const isExist = await User.findOne({ email });
+
+        if (isExist) return res.status(402).json({
+            success: false,
+            message: 'User with this email already exists'
+        });
+
         const user = await User.findById(req.user._id);
 
         if (name) user.name = name;
@@ -147,11 +161,14 @@ export const updateProfilePicture = async (req, res) => {
             message: "Please upload your picture"
         });
 
-        const fileUri = getDataUri(file);
+        //const fileUri = getDataUri(file);
 
-        const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
+        console.log(file);
+
+        const myCloud = await cloudinary.v2.uploader.upload(file.filename);
 
         await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+
 
         user.avatar = {
             public_id: myCloud.public_id,
@@ -160,12 +177,15 @@ export const updateProfilePicture = async (req, res) => {
 
         await user.save();
 
+        unLinkFile(file.filename);
+
         res.status(200).json({
             success: true,
-            message: "Your profile has been updated successfully"
+            message: "Your profile picture been updated successfully"
         });
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             success: true,
             message: error
@@ -268,5 +288,31 @@ export const resetPassword = async (req, res) => {
     res.status(200).json({
         success: true,
         message: `Your password has been changed successfully.`
+    });
+}
+
+export const deleteAccount = async (req, res) => {
+
+    const { password } = req.body;
+
+    if (!password) return res.status(422).json({
+        success: false,
+        message: 'Please enter your password'
+    });
+
+    const user = await User.findById(req.user._id);
+
+    const isVerified = await bcrypt.compare(user.password, password);
+
+    if (!isVerified) return res.status(402).json({
+        success: false,
+        message: 'Incorrect password'
+    });
+
+    await user.delete();
+
+    res.status(200).json({
+        success: true,
+        message: `Your account has been deleted successfully.`
     });
 }

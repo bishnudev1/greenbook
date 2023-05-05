@@ -1,53 +1,68 @@
-import React, { useEffect } from 'react';
-import { Button } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Button, Box, Stack, VStack, HStack, Text, Heading, Image } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { orderPlant } from '../../redux/actions/orderAction';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GrAdd, GrSubtract } from 'react-icons/gr';
 
 const OrderPlant = () => {
 
-    const { loading, error, message } = useSelector(state => state.order);
+  const { loading, error, message } = useSelector(state => state.order);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (error) {
-            toast.error(error, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            dispatch({ type: "clearError" })
-          }
-          if (message) {
-            toast.success(message, {
-              position: toast.POSITION.TOP_RIGHT,
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            dispatch({ type: "clearMessage" });
-          }
-    }, [dispatch, error, message])
+  const [plant, setPlant] = useState(1);
 
-    const orderPlantHandler = async (e) => {
-        e.preventDefault();
-        dispatch(orderPlant(500));
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch({ type: "clearError" })
     }
+    if (message) {
+      toast.success(message, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch({ type: "clearMessage" });
+    }
+  }, [dispatch, error, message])
 
-    return (
-        <div>
-            <Button isLoading={loading} variant={'solid'} colorScheme='blue' onClick={orderPlantHandler}>Order Plant</Button>
-        </div>
-    )
+  const orderPlantHandler = async (e) => {
+    e.preventDefault();
+    dispatch(orderPlant(plant, 10.99));
+  }
+
+  return (
+    <Box bg={'#f7f7f7'} p={["4", "20"]} minH={"90vh"}>
+      <Stack color={'blackAlpha.700'} justifyContent={["center"]} direction={["column", "row"]} spacing={"5"}>
+        <Image height={"sm"} width={"sm"} objectFit={'contain'} src={'https://www.kindpng.com/picc/m/55-553143_transparent-plant-cartoon-png-transparent-cartoon-plant-png.png'} />
+        <VStack alignItems={["center", "flex-start"]} spacing={["4", "6"]}>
+          <Heading>Small Plant</Heading>
+          <Text fontSize={"lg"} fontFamily={"revert"}>Two pieces small sized fresh Albizia Lebbeck</Text>
+          <HStack alignItems={"center"} justifyContent={"flex-start"} spacing={"4"}>
+            <Button onClick={() => setPlant(plant === 1 ? 1 : plant - 1)} variant={'link'}><GrSubtract /></Button>
+            <Text>{plant}</Text>
+            <Button onClick={() => setPlant(plant + 1)} variant={'link'}><GrAdd /></Button>
+          </HStack>
+          <Button isLoading={loading} onClick={orderPlantHandler} variant={'solid'} size={'lg'} colorScheme='green'>Donate Now</Button>
+        </VStack>
+      </Stack>
+    </Box>
+  )
 }
 
 export default OrderPlant

@@ -5,12 +5,18 @@ import { User } from "../model/user.js";
 
 export const orderPlant = async (req, res) => {
     try {
-        const { amount } = req.body;
+        const { item, amount } = req.body;
 
         const order = await razorpayInstance.orders.create({
             amount: Number(amount * 80 * 100),
             currency: "INR"
         });
+
+        const user = await User.findById(req.user._id);
+
+        user.noOfTreesPlanted += item;
+
+        await user.save();
 
         res.status(200).json({
             success: true,

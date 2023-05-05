@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { backendUrl } from '../store';
 
-export const orderPlant = (amount) => async (dispatch) => {
+export const orderPlant = (item, amount) => async (dispatch) => {
     try {
         dispatch({ type: "orderPlantRequest" });
 
@@ -11,7 +11,8 @@ export const orderPlant = (amount) => async (dispatch) => {
             });
 
         const { data: { order } } = await axios.post(`${backendUrl}/order-plant`, {
-            amount
+            amount,
+            item
         }, {
             withCredentials: true
         });

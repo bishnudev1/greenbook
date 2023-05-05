@@ -2,7 +2,6 @@ import axios from 'axios';
 import { backendUrl } from '../store';
 
 
-
 export const contact = (name, email, message) => async (dispatch) => {
     try {
         dispatch({ type: "contactRequest" });

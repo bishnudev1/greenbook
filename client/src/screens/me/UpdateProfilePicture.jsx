@@ -50,7 +50,7 @@ const UpdateProfilePicture = () => {
         if (error) {
             toast.error(error, {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -61,7 +61,7 @@ const UpdateProfilePicture = () => {
         }
         if (message) {
             toast.success(message, {
-                position: toast.POSITION.TOP_RIGHT,
+                position: toast.POSITION.TOP_CENTER,
                 autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -69,8 +69,8 @@ const UpdateProfilePicture = () => {
                 draggable: true,
                 progress: undefined,
             });
-            navigate('/me');
             dispatch({ type: "clearMessage" });
+            navigate('/me');
         }
     }, [dispatch, error, message])
 
