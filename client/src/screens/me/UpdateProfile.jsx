@@ -41,7 +41,10 @@ const UpdateProfile = () => {
                 progress: undefined,
             });
             dispatch({ type: "clearMessage" });
-            navigate('/me');
+            setTimeout(() => {
+                navigate('/me');
+            }, 2000);
+
         }
     }, [dispatch, error, message])
 

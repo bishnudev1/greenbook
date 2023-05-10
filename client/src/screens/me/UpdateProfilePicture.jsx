@@ -3,7 +3,7 @@ import { Box, Button, VStack, Input, FormLabel, Avatar } from '@chakra-ui/react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { updateProfilePicture } from '../../redux/actions/profileAction';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -70,7 +70,9 @@ const UpdateProfilePicture = () => {
                 progress: undefined,
             });
             dispatch({ type: "clearMessage" });
-            navigate('/');
+            setTimeout(() => {
+                navigate('/me');
+            }, 2000);
         }
     }, [dispatch, error, message])
 

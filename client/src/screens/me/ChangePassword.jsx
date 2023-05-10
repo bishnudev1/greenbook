@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, VStack, Input, FormLabel } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changePassword } from '../../redux/actions/profileAction';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,28 +20,31 @@ const ChangePassword = () => {
     useEffect(() => {
         if (error) {
             toast.error(error, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
             });
             dispatch({ type: "clearError" })
-          }
-          if (message) {
+        }
+        if (message) {
             toast.success(message, {
-              position: toast.POSITION.TOP_RIGHT,
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
             });
             dispatch({ type: "clearMessage" });
-          }
+            setTimeout(() => {
+                navigate('/me');
+            }, 2000);
+        }
     }, [dispatch, error, message])
 
     const ChangePasswordHandler = e => {

@@ -71,6 +71,9 @@ const CreateBlog = () => {
               progress: undefined,
             });
             dispatch({ type: "clearMessage" });
+            setTimeout(() => {
+                navigate('/greenblogs');
+            }, 2000);
           }
     }, [dispatch, error, message]);
 

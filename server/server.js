@@ -30,6 +30,7 @@ export const razorpayInstance = new Razorpay({
 app.listen(process.env.PORT, () => {
     connectDB().then(() => {
         console.log(`Server has started at http://localhost:${process.env.PORT}`);
-        console.log('Mongo Connected');
+        console.log('MongoDB has Connected');
+        console.log('Firebase has been connected to Express');
     }).catch((err) => console.log(err))
 })

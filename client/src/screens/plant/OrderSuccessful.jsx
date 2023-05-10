@@ -12,7 +12,7 @@ const OrderSuccessful = () => {
             <VStack spacing={"5"} justifyContent={["center"]} alignItems={"center"}>
                 <Heading color={"black"}>Your Order Successfull</Heading>
                 <Text color={"black"}>Reference No. ${orderReferenceNumber}</Text>
-                <Link to={'/order-plant'}><Button size={"lg"} variant={'ghost'} colorScheme='blue'>Order Now</Button></Link>
+                <Link to={'/order-plant'}><Button size={"lg"} variant={'ghost'} colorScheme='blue'>Order More</Button></Link>
             </VStack>
         </Box>
     )
