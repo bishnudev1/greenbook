@@ -23,12 +23,12 @@
 
 ### Database
 - MongoDB Atlas
+- Firebase
 
 ### State Management
 - Redux Toolkit
 
 ### 3rd Party Services
-- Cloudinary
 - Mailport
 - Razorpay
 
@@ -43,9 +43,7 @@
 - PORT
 - MONGO_URI
 - SECRET_KEY
-- CLOUDINARY_CLOUD_NAME
-- CLOUDINARY_API_KEY
-- CLOUDINARY_API_SECRET
+- FIREBASE_BUCKET_NAME
 - SMTP_HOST
 - SMTP_USER
 - SMTP_PORT
@@ -94,4 +92,4 @@ docker run -p greenbook 5000:5000
 - <b>Toaster</b> in App.js is giving DOM error while rendering the entire app.
 
 
-### Note that this project is still far from done. I'm still working in it and have a plan for future. Feel free to contribute in. Thank you 🙂.
+### Note that this project is still not done. I'm still in it and have a plan for future. Feel free to contribute in. Thank you 🙂.
