@@ -2,13 +2,12 @@ import React from 'react'
 import { Heading, VStack, Text, HStack, Image, Container, useDisclosure, Button } from '@chakra-ui/react';
 import { SiLinkedin, SiTwitter, SiWhatsapp } from 'react-icons/si';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
 } from '@chakra-ui/react'
@@ -16,13 +15,17 @@ import { deleteBlog } from '../../redux/actions/blogAction';
 
 const Blog = () => {
 
-    const currentUrl = window.location.href;
+    const location = useLocation();
+
+    const { user } = useSelector(state => state.user);
+    const blogData = location.state ? location.state : null;
+    const currentUser = user ? user : null;
 
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
-    const location = useLocation();
+    const currentUrl = window.location.href;
 
     const deleteBlogHandler = (id) => {
         dispatch(deleteBlog(id));
@@ -41,7 +44,6 @@ const Blog = () => {
         twitter: `https://twitter.com/intent/tweet?text=${currentUrl}`
     }
 
-    const blogData = location.state ? location.state : null;
 
     return (
         <>
@@ -53,7 +55,7 @@ const Blog = () => {
                     <ModalCloseButton />
                     <ModalBody>
                         <Text mb={"4"}>Are you sure want to delete your blog ? It can't be undone.</Text>
-                        <Button variant={"link"} colorScheme='white' onClick={deleteBlogHandler(blogData._id)}>Delete</Button>
+                        <Button variant={"link"} colorScheme='red' onClick={() => deleteBlogHandler(blogData._id)}>Delete</Button>
                     </ModalBody>
                 </ModalContent></Modal>
             <Container bg={"white"} minH={"100vh"} maxW={"100%"} p={["4", "16"]}>
@@ -67,6 +69,12 @@ const Blog = () => {
                             <HStack pt={["4", "6"]} spacing={["4", "8"]} justifyContent={"space-evenly"} alignItems={["center", "flex-end"]}>
                                 <Text fontWeight={"bold"} color={'green.400'} fontFamily={"inherit"}>{`Published on ${blogData.createdAt}`}</Text>
                                 <Text fontWeight={"bold"} color={'green.400'} fontFamily={"inherit"}>{`Written by ${blogData.createdBy}`}</Text>
+                                {
+
+                                    currentUser === null ? null : blogData.user === currentUser.user._id ? <Button
+                                        onClick={onOpen}
+                                        size={'lg'} variant={'link'} color={'red'}>Delete</Button> : null
+                                }
                             </HStack>
                             <HStack width={["100%", "unset"]} spacing={["4", "8"]} justifyContent={"space-evenly"}>
                                 <a href={shareApi.whatsapp}><SiWhatsapp size={'40'} color='green' /></a>

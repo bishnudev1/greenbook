@@ -9,10 +9,8 @@ import toast from 'react-hot-toast';
 const Blogs = () => {
 
     const { blogs, error, message, loading } = useSelector(state => state.blog);
-    const { user } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
-    const currentUser = user ? user : null;
 
     useEffect(() => {
         if (error) {
@@ -42,12 +40,6 @@ const Blogs = () => {
                             </HStack>
                             <HStack spacing={"4"}>
                                 <Link to={`blog/${item._id}`} state={item} ><Button variant={'link'} color={'green'} size={'lg'}>Read Now</Button></Link>
-                                {
-
-                                    currentUser === null ? null : item.user === currentUser.user._id ? <Button
-                                        onClick={() => {}}
-                                        size={'lg'} variant={'link'} color={'red'}>Delete</Button> : null
-                                }
                             </HStack>
                         </VStack>
                     })
